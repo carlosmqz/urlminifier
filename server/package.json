@@ -1,0 +1,24 @@
+{
+  "name": "url-minifier",
+  "version": "1.0.0",
+  "description": "Practice URL shortener",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "Cj Marquez",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^4.1.0",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "nanoid": "^3.1.12"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.4"
+  }
+}

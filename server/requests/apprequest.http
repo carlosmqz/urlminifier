@@ -1,0 +1,11 @@
+POST http://localhost:3000/url
+content-type: application/json
+
+{
+   "shortUrlId":"gore",
+   "longUrl":"https://music.youtube.com/watch?v=wPMznBJGl0c&list=OLAK5uy_nazTzzKNyhdQDiDQLYRe36nUbL05rvze0"
+}
+
+###
+
+GET http://localhost:3000/url/wrrXF
