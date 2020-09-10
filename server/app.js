@@ -11,15 +11,10 @@ app.use(cors());
 app.use(morgan('tiny'));
 app.use(helmet());
 app.use(express.json())
+//app.use(express.urlencoded({extended:false}))
 
 
-app.get('/',(req, res, next) =>{
-    res.json({
-        message: 'Home Page loaded'
-    })
-})
-
-app.get('/url/:id', (req, res, next) =>{
+app.get('/:id', (req, res, next) =>{
     const shortUrlId = req.params.id;
     dbConnection.query("SELECT * FROM urlminifier WHERE shorturlid=?", [shortUrlId],
     (err, results) =>{
@@ -33,7 +28,7 @@ app.get('/url/:id', (req, res, next) =>{
     })
 })
 
-app.post('/url', (req, res, next) =>{
+app.post('/api/url', (req, res, next) =>{
     const shortUrlId = req.body.shortUrlId || nanoid(5);
     const longUrl = req.body.longUrl;
     if(!longUrl){
@@ -44,6 +39,7 @@ app.post('/url', (req, res, next) =>{
         dbConnection.query("SELECT * from urlminifier WHERE shorturlid = ?",[shortUrlId],
         function(err, results){
             if(err){
+                console.log(err)
                 throw err;
             }
             
@@ -52,7 +48,7 @@ app.post('/url', (req, res, next) =>{
                     error: "Cannot have duplicated shortener identifiers"
                 })
             }else{
-                let shortUrl = "http://localhost:3000/url/"+shortUrlId
+                let shortUrl = "http://localhost:3000/"+shortUrlId
                 dbConnection.query("INSERT INTO urlminifier SET longurl=?, shorturlid=?",[longUrl,shortUrlId],
                 (err, results) =>{
                     if(err){
